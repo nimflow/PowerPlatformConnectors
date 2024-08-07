@@ -1,10 +1,10 @@
 {
-  "x-generator": "NSwag v13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))",
+  "x-generator": "NSwag v14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))",
   "swagger": "2.0",
   "info": {
     "title": "Nimflow",
-    "description": "Nimflow Web API allows to dispatch actions, send responses and subscribe to events using standard web hooks.",
-    "version": "6.31.0",
+    "description": "The Nimflow Web API enables the execution of actions on cases and tasks, and facilitates subscription to events via standard webhooks.",
+    "version": "7.0.0",
     "contact": {
       "name": "Nimflow",
       "url": "https://nimflow.com",
@@ -12,15 +12,11 @@
     }
   },
   "host": "api.nimflow.com",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
     "/Contexts/DispatchAction": {
       "post": {
-        "tags": [
-          "Contexts"
-        ],
+        "tags": ["Contexts"],
         "summary": "Dispatch action",
         "operationId": "Contexts_DispatchAction",
         "description": "Dispatch an action to a context in nimflow",
@@ -89,14 +85,13 @@
             "description": "",
             "schema": {}
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/Tasks/AddResponse": {
       "post": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Add task response",
         "operationId": "Tasks_AddResponse",
         "description": "Send a task response to a context in nimflow",
@@ -165,7 +160,8 @@
             "description": "",
             "schema": {}
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/WhenTaskCreated": {
@@ -176,9 +172,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "When a task is created",
         "description": "Subscribe to a task created event.",
         "operationId": "WhenTaskCreated_Post",
@@ -219,9 +213,7 @@
             "required": true,
             "schema": {
               "type": "object",
-              "required": [
-                "callbackUrl"
-              ],
+              "required": ["callbackUrl"],
               "properties": {
                 "callbackUrl": {
                   "type": "string",
@@ -270,14 +262,13 @@
             "schema": {}
           }
         },
-        "x-ms-trigger": "single"
+        "x-ms-trigger": "single",
+        "deprecated": true
       }
     },
     "/WhenTaskCreated/{hookId}": {
       "delete": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "Delete a subscription to a task created event",
         "description": "Delete a subscription to a task created event.",
         "operationId": "WhenTaskCreated_Delete",
@@ -318,7 +309,8 @@
             "description": "",
             "schema": {}
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/WhenTaskUpdated": {
@@ -329,9 +321,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "When a task is updated",
         "description": "Subscribe to a task updated event.",
         "operationId": "WhenTaskUpdated_Post",
@@ -372,9 +362,7 @@
             "required": true,
             "schema": {
               "type": "object",
-              "required": [
-                "callbackUrl"
-              ],
+              "required": ["callbackUrl"],
               "properties": {
                 "callbackUrl": {
                   "type": "string",
@@ -423,14 +411,13 @@
             "schema": {}
           }
         },
-        "x-ms-trigger": "single"
+        "x-ms-trigger": "single",
+        "deprecated": true
       }
     },
     "/WhenTaskUpdated/{hookId}": {
       "delete": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "Delete a subscription to a task updated event",
         "description": "Delete a subscription to a task updated event.",
         "operationId": "WhenTaskUpdated_Delete",
@@ -471,7 +458,8 @@
             "description": "",
             "schema": {}
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/WhenTaskArchived": {
@@ -482,9 +470,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "When a task is archived",
         "description": "Subscribe to a task archived event.",
         "operationId": "WhenTaskArchived_Post",
@@ -525,9 +511,7 @@
             "required": true,
             "schema": {
               "type": "object",
-              "required": [
-                "callbackUrl"
-              ],
+              "required": ["callbackUrl"],
               "properties": {
                 "callbackUrl": {
                   "type": "string",
@@ -576,14 +560,13 @@
             "schema": {}
           }
         },
-        "x-ms-trigger": "single"
+        "x-ms-trigger": "single",
+        "deprecated": true
       }
     },
     "/WhenTaskArchived/{hookId}": {
       "delete": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "Delete a subscription to a task archived event",
         "description": "Delete a subscription to a task archived event.",
         "operationId": "WhenTaskArchived_Delete",
@@ -624,7 +607,8 @@
             "description": "",
             "schema": {}
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/WhenMilestoneReached": {
@@ -635,9 +619,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "When a milestone is reached",
         "description": "Subscribe to a milestone reached event.",
         "operationId": "WhenMilestoneReached_Post",
@@ -678,9 +660,7 @@
             "required": true,
             "schema": {
               "type": "object",
-              "required": [
-                "callbackUrl"
-              ],
+              "required": ["callbackUrl"],
               "properties": {
                 "callbackUrl": {
                   "type": "string",
@@ -729,14 +709,13 @@
             "schema": {}
           }
         },
-        "x-ms-trigger": "single"
+        "x-ms-trigger": "single",
+        "deprecated": true
       }
     },
     "/WhenMilestoneReached/{hookId}": {
       "delete": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "Delete a subscription to a milestone reached event",
         "description": "Delete a subscription to a milestone reached event.",
         "operationId": "WhenMilestoneReached_Delete",
@@ -777,7 +756,8 @@
             "description": "",
             "schema": {}
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/WhenMilestoneCleared": {
@@ -788,9 +768,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "When a milestone is cleared",
         "description": "Subscribe to a milestone cleared event.",
         "operationId": "WhenMilestoneCleared_Post",
@@ -831,9 +809,7 @@
             "required": true,
             "schema": {
               "type": "object",
-              "required": [
-                "callbackUrl"
-              ],
+              "required": ["callbackUrl"],
               "properties": {
                 "callbackUrl": {
                   "type": "string",
@@ -882,14 +858,13 @@
             "schema": {}
           }
         },
-        "x-ms-trigger": "single"
+        "x-ms-trigger": "single",
+        "deprecated": true
       }
     },
     "/WhenMilestoneCleared/{hookId}": {
       "delete": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "Delete a subscription to a milestone cleared event",
         "description": "Delete a subscription to a milestone cleared event.",
         "operationId": "WhenMilestoneCleared_Delete",
@@ -930,6 +905,372 @@
             "description": "",
             "schema": {}
           }
+        },
+        "deprecated": true
+      }
+    },
+    "/environment/cases/{caseTypeName}/{caseId}/{actionName}": {
+      "post": {
+        "tags": ["Cases"],
+        "description": "Execute an action on an existing case or create a new one with the caseId provided.",
+        "operationId": "ExecuteCaseAction",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "caseTypeName",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "actionName",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "name": "payload",
+            "in": "body",
+            "schema": {},
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CaseInfo"
+            }
+          },
+          "404": {
+            "description": ""
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/environment/cases/when-case-event/{hookId}": {
+      "get": {
+        "tags": ["Cases"],
+        "description": "Get a case event webhook by id.",
+        "operationId": "GetCaseWebhook",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "hookId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CaseWebhookEntity"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Cases"],
+        "description": "Delete a case event webhook.",
+        "operationId": "DeleteCaseWebhook",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "environmentId",
+            "in": "query",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "hookId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/environment/cases/when-case-event": {
+      "post": {
+        "tags": ["Cases"],
+        "description": "Subscribe to a case event creating a webhook.",
+        "operationId": "CreateWhenCaseWebhook",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCaseWebhookRequest"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/environment/case-tasks/{caseId}/{taskTypeName}/{actionName}": {
+      "post": {
+        "tags": ["Case Tasks"],
+        "description": "Execute a action on an active case task.",
+        "operationId": "ExecuteTaskAction",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "taskTypeName",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "actionName",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "name": "payload",
+            "in": "body",
+            "schema": {},
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/environment/case-tasks/when-case-task-event": {
+      "post": {
+        "tags": ["Case Tasks"],
+        "description": "Subscribe to a case task event creating a webhook.",
+        "operationId": "CreateWhenCaseTaskWebhook",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCaseTaskWebhookRequest"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/environment/case-tasks/when-case-task-event/{hookId}": {
+      "get": {
+        "tags": ["Case Tasks"],
+        "description": "Get a case task event webhook by id.",
+        "operationId": "GetCaseTaskWebhook",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "environmentId",
+            "in": "query",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "hookId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CaseTaskWebhookEntity"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Case Tasks"],
+        "description": "Delete a case task event webhook.",
+        "operationId": "DeleteCaseTaskWebhookRoute",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "environmentId",
+            "in": "query",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "hookId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
         }
       }
     }
@@ -938,10 +1279,7 @@
     "DispatchContextActionResult": {
       "type": "object",
       "description": "Represents the result of dispatching a context action.",
-      "required": [
-        "contextId",
-        "isNew"
-      ],
+      "required": ["contextId", "isNew"],
       "properties": {
         "contextId": {
           "type": "string",
@@ -959,11 +1297,7 @@
     "DispatchContextAction": {
       "type": "object",
       "description": "Represents a command to send an action in an existing context or to create it if it does not exist and the action is marked as initial. ContextId or reference must be defined.",
-      "required": [
-        "contextTypeName",
-        "reference",
-        "action"
-      ],
+      "required": ["contextTypeName", "reference", "action"],
       "properties": {
         "contextTypeName": {
           "type": "string",
@@ -999,16 +1333,8 @@
       "type": "integer",
       "description": "",
       "title": "Importance",
-      "x-enumNames": [
-        "Normal",
-        "High",
-        "Low"
-      ],
-      "enum": [
-        0,
-        1,
-        -1
-      ]
+      "x-enumNames": ["Normal", "High", "Low"],
+      "enum": [0, 1, -1]
     },
     "AddTaskResponseResult": {
       "type": "object",
@@ -1034,7 +1360,7 @@
         "contextReference": {
           "type": "string",
           "title": "Context reference",
-          "description": "Gets or sets the context\u00b4s reference the task should belongs to."
+          "description": "Gets or sets the context's reference the task should belongs to."
         },
         "sentBy": {
           "type": "string",
@@ -1079,7 +1405,7 @@
         "responseTypeName": {
           "type": "string",
           "title": "Response type name",
-          "description": "Gets or sets the name of the response type, previously defined for its task type, for which you are trying to send\na response.",
+          "description": "Gets or sets the name of the response type, previously defined for its task type, for which you are trying to send a response.",
           "minLength": 1
         },
         "itemKey": {
@@ -1477,42 +1803,262 @@
           "title": "Milestone name"
         }
       }
+    },
+    "CaseInfo": {
+      "type": "object",
+      "required": ["id", "caseTypeVersion"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/CaseStatus"
+        },
+        "recalculateOn": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "caseTypeName": {
+          "type": "string"
+        },
+        "caseTypeVersion": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseTaskInfo"
+          }
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseEventInfo"
+          }
+        }
+      }
+    },
+    "CaseStatus": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": ["Open", "Finalized", "Cancelled", "Terminated"],
+      "enum": ["Open", "Finalized", "Cancelled", "Terminated"]
+    },
+    "CaseTaskInfo": {
+      "type": "object",
+      "required": ["taskType", "caseId", "status"],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "taskType": {
+          "type": "string"
+        },
+        "data": {},
+        "caseId": {
+          "type": "string"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "$ref": "#/definitions/CaseTaskStatus"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseTaskEventInfo"
+          }
+        }
+      }
+    },
+    "CaseTaskStatus": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": ["Active", "Completed", "Cancelled"],
+      "enum": ["Active", "Completed", "Cancelled"]
+    },
+    "CaseTaskEventInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CaseEventInfoBase"
+        },
+        {
+          "type": "object",
+          "required": ["event"],
+          "properties": {
+            "event": {
+              "$ref": "#/definitions/CaseTaskEvent"
+            },
+            "taskType": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "CaseTaskEvent": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Created",
+        "Completed",
+        "Reactivated",
+        "Cancelled",
+        "Modified"
+      ],
+      "enum": ["Created", "Completed", "Reactivated", "Cancelled", "Modified"]
+    },
+    "CaseEventInfoBase": {
+      "type": "object",
+      "x-abstract": true,
+      "required": ["timestamp"],
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CaseEventInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CaseEventInfoBase"
+        },
+        {
+          "type": "object",
+          "required": ["event"],
+          "properties": {
+            "event": {
+              "$ref": "#/definitions/CaseEvent"
+            }
+          }
+        }
+      ]
+    },
+    "CaseEvent": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Opened",
+        "Finalized",
+        "Reopened",
+        "Cancelled",
+        "Terminated"
+      ],
+      "enum": ["Opened", "Finalized", "Reopened", "Cancelled", "Terminated"]
+    },
+    "CaseWebhookEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CaseWebhookEntityBase"
+        },
+        {
+          "type": "object",
+          "required": ["events"],
+          "properties": {
+            "events": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CaseEvent"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "CaseWebhookEntityBase": {
+      "type": "object",
+      "x-abstract": true,
+      "required": ["id", "url"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 26,
+          "minLength": 26
+        },
+        "caseTypeName": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "CreateCaseWebhookRequest": {
+      "type": "object",
+      "required": ["callbackUrl"],
+      "properties": {
+        "callbackUrl": {
+          "type": "string"
+        },
+        "caseTypeName": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseEvent"
+          }
+        }
+      }
+    },
+    "CreateCaseTaskWebhookRequest": {
+      "type": "object",
+      "required": ["callbackUrl"],
+      "properties": {
+        "callbackUrl": {
+          "type": "string"
+        },
+        "caseTypeName": {
+          "type": "string"
+        },
+        "taskType": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseTaskEvent"
+          }
+        }
+      }
+    },
+    "CaseTaskWebhookEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CaseWebhookEntityBase"
+        },
+        {
+          "type": "object",
+          "required": ["events"],
+          "properties": {
+            "taskType": {
+              "type": "string"
+            },
+            "events": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CaseTaskEvent"
+              }
+            }
+          }
+        }
+      ]
     }
   },
-  "tags": [
-    {
-      "name": "Contexts",
-      "description": "Provides access to query existing context instances and dispatch actions."
-    },
-    {
-      "name": "Events",
-      "description": "Provides access to query and register events."
-    },
-    {
-      "name": "Functions",
-      "description": "Provides end-points to discovery modules and their functions and to maintain user-defined functions."
-    },
-    {
-      "name": "Tasks",
-      "description": "Provides access to query existing tasks, manage them, and submit responses."
-    },
-    {
-      "name": "Webhooks"
-    }
-  ],
   "securityDefinitions": {
-    "api_key": {
+    "apiKey": {
       "type": "apiKey",
-      "in": "header",
-      "name": "x-api-key"
+      "description": "API key used in the Authorization header.",
+      "name": "apiKey",
+      "in": "header"
     }
   },
   "basePath": "/",
-  "security": [
-    {
-      "Api key": []
-    }
-  ],
   "x-ms-connector-metadata": [
     {
       "propertyName": "Website",

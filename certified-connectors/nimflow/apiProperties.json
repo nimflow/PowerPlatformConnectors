@@ -1,7 +1,7 @@
 {
   "properties": {
     "connectionParameters": {
-      "BaseUrl": {
+      "baseUrl": {
         "type": "string",
         "uiDefinition": {
           "displayName": "Base url",
@@ -14,7 +14,7 @@
           }
         }
       },
-      "api_key": {
+      "apiKey": {
         "type": "securestring",
         "uiDefinition": {
           "displayName": "API key",
@@ -27,29 +27,16 @@
           }
         }
       },
-      "unit_id":{
+      "environmentId": {
         "type": "string",
         "uiDefinition": {
-          "displayName": "Unit id",
-          "description": "The nimflow unit id for this connection",
-          "tooltip": "Provide your nimflow unit id",
+          "displayName": "Environment id",
+          "description": "The nimflow environment id for this connection",
+          "tooltip": "Provide your nimflow environment id",
           "constraints": {
             "tabIndex": 4,
             "clearText": false,
             "required": "true"
-          }
-        }
-      },
-      "subscription_key":{
-        "type": "string",
-        "uiDefinition": {
-          "displayName": "Subscription key",
-          "description": "The nimflow subscription key for this connection",
-          "tooltip": "Provide your nimflow subscription key",
-          "constraints": {
-            "tabIndex": 5,
-            "clearText": false,
-            "required": "false"
           }
         }
       }
@@ -61,25 +48,15 @@
         "templateId": "dynamichosturl",
         "title": "TenantURL",
         "parameters": {
-          "x-ms-apimTemplateParameter.urlTemplate": "https://@connectionParameters('BaseUrl')"
+          "x-ms-apimTemplateParameter.urlTemplate": "https://@connectionParameters('baseUrl')"
         }
       },
       {
         "templateId": "setheader",
-        "title": "Set unit-id header",
+        "title": "Set environmentId header",
         "parameters": {
-          "x-ms-apimTemplateParameter.name": "unit-id",
-          "x-ms-apimTemplateParameter.value": "@connectionParameters('unit_id')",
-          "x-ms-apimTemplateParameter.existsAction": "override",
-          "x-ms-apimTemplate-policySection": "Request"
-        }
-      },
-      {
-        "templateId": "setheader",
-        "title": "Set subscription-key header",
-        "parameters": {
-          "x-ms-apimTemplateParameter.name": "subscription-key",
-          "x-ms-apimTemplateParameter.value": "@connectionParameters('subscription_key','')",
+          "x-ms-apimTemplateParameter.name": "environmentId",
+          "x-ms-apimTemplateParameter.value": "@connectionParameters('environmentId')",
           "x-ms-apimTemplateParameter.existsAction": "override",
           "x-ms-apimTemplate-policySection": "Request"
         }
