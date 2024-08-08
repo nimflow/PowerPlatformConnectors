@@ -165,7 +165,7 @@
       "post": {
         "tags": ["Cases"],
         "description": "Subscribe to a case event creating a webhook.",
-        "operationId": "CreateWhenCaseWebhook",
+        "operationId": "WhenCase",
         "consumes": ["application/json"],
         "parameters": [
           {
@@ -271,7 +271,7 @@
       "post": {
         "tags": ["Case Tasks"],
         "description": "Subscribe to a case task event creating a webhook.",
-        "operationId": "CreateWhenCaseTaskWebhook",
+        "operationId": "WhenCaseTask",
         "consumes": ["application/json"],
         "parameters": [
           {
