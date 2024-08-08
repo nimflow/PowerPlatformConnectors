@@ -156,6 +156,12 @@
       }
     },
     "/environment/cases/when-case-event": {
+      "x-ms-notification-content": {
+        "description": "Subscribe to CaseEventWebhookPayload event.",
+        "schema": {
+          "$ref": "#/definitions/CaseEventWebhookPayload"
+        }
+      },
       "post": {
         "tags": ["Cases"],
         "description": "Subscribe to a case event creating a webhook.",
@@ -190,7 +196,8 @@
           {
             "apiKey": []
           }
-        ]
+        ],
+        "x-ms-trigger": "single"
       }
     },
     "/environment/case-tasks/{caseId}/{taskTypeName}/{actionName}": {
@@ -255,6 +262,12 @@
       }
     },
     "/environment/case-tasks/when-case-task-event": {
+      "x-ms-notification-content": {
+        "description": "Subscribe to CaseTaskEventWebhookPayload event.",
+        "schema": {
+          "$ref": "#/definitions/CaseTaskEventWebhookPayload"
+        }
+      },
       "post": {
         "tags": ["Case Tasks"],
         "description": "Subscribe to a case task event creating a webhook.",
@@ -289,7 +302,8 @@
           {
             "apiKey": []
           }
-        ]
+        ],
+        "x-ms-trigger": "single"
       }
     },
     "/environment/case-tasks/when-case-task-event/{hookId}": {
@@ -570,7 +584,9 @@
       "required": ["callbackUrl"],
       "properties": {
         "callbackUrl": {
-          "type": "string"
+          "type": "string",
+          "x-ms-notification-url": true,
+          "x-ms-visibility": "internal"
         },
         "caseTypeName": {
           "type": "string"
@@ -583,12 +599,26 @@
         }
       }
     },
+    "CaseEventWebhookPayload": {
+      "type": "object",
+      "required": ["case", "event"],
+      "properties": {
+        "case": {
+          "$ref": "#/definitions/CaseInfo"
+        },
+        "event": {
+          "$ref": "#/definitions/CaseEventInfo"
+        }
+      }
+    },
     "CreateCaseTaskWebhookRequest": {
       "type": "object",
       "required": ["callbackUrl"],
       "properties": {
         "callbackUrl": {
-          "type": "string"
+          "type": "string",
+          "x-ms-notification-url": true,
+          "x-ms-visibility": "internal"
         },
         "caseTypeName": {
           "type": "string"
@@ -601,6 +631,18 @@
           "items": {
             "$ref": "#/definitions/CaseTaskEvent"
           }
+        }
+      }
+    },
+    "CaseTaskEventWebhookPayload": {
+      "type": "object",
+      "required": ["task", "event"],
+      "properties": {
+        "task": {
+          "$ref": "#/definitions/CaseTaskInfo"
+        },
+        "event": {
+          "$ref": "#/definitions/CaseTaskEventInfo"
         }
       }
     },
