@@ -677,6 +677,11 @@
       "in": "header"
     }
   },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
   "basePath": "/",
   "x-ms-connector-metadata": [
     {

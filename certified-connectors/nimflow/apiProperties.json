@@ -60,6 +60,16 @@
           "x-ms-apimTemplateParameter.existsAction": "override",
           "x-ms-apimTemplate-policySection": "Request"
         }
+      },
+      {
+        "templateId": "setheader",
+        "title": "Set API Key header",
+        "parameters": {
+          "x-ms-apimTemplateParameter.name": "apiKey",
+          "x-ms-apimTemplateParameter.value": "@connectionParameters('apiKey')",
+          "x-ms-apimTemplateParameter.existsAction": "override",
+          "x-ms-apimTemplate-policySection": "Request"
+        }
       }
     ],
     "publisher": "Nimflow LLC",
