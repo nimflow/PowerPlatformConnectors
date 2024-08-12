@@ -14,6 +14,85 @@
   "host": "api.nimflow.com",
   "schemes": ["https"],
   "paths": {
+    "/environment/cases": {
+      "get": {
+        "tags": ["Cases"],
+        "description": "Search cases by their common fields.",
+        "operationId": "SearchCases",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "CaseTypeName",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "Status",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/CaseStatus"
+            },
+            "x-nullable": true,
+            "enum": ["Open", "Finalized", "Cancelled", "Terminated"]
+          },
+          {
+            "type": "string",
+            "name": "CaseId",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "integer",
+            "name": "ExcludeCaseTypeVersion",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          },
+          {
+            "type": "integer",
+            "name": "Skip",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          },
+          {
+            "type": "integer",
+            "name": "Take",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "A list of cases matching the search criteria.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CaseInfo"
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey-auth": []
+          }
+        ]
+      }
+    },
     "/environment/cases/{caseTypeName}/{caseId}/{actionName}": {
       "post": {
         "tags": ["Cases"],
@@ -70,7 +149,7 @@
         },
         "security": [
           {
-            "apiKey": []
+            "apiKey-auth": []
           }
         ]
       }
@@ -110,7 +189,7 @@
         },
         "security": [
           {
-            "apiKey": []
+            "apiKey-auth": []
           }
         ]
       },
@@ -194,10 +273,145 @@
         },
         "security": [
           {
-            "apiKey": []
+            "apiKey-auth": []
           }
         ],
         "x-ms-trigger": "single"
+      }
+    },
+    "/environment/case-tasks": {
+      "get": {
+        "tags": ["Case Tasks"],
+        "description": "Search for active tasks using their common fields.",
+        "operationId": "SearchCaseTasks",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "CaseTypeName",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "TaskType",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "CaseStatus",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/CaseStatus"
+            },
+            "x-nullable": true,
+            "enum": ["Open", "Finalized", "Cancelled", "Terminated"]
+          },
+          {
+            "type": "string",
+            "name": "TaskStatus",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/CaseTaskStatus"
+            },
+            "x-nullable": true,
+            "enum": ["Active", "Completed", "Cancelled"]
+          },
+          {
+            "type": "string",
+            "name": "CaseId",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "integer",
+            "name": "Skip",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          },
+          {
+            "type": "integer",
+            "name": "Take",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CaseTaskInfo"
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey-auth": []
+          }
+        ]
+      }
+    },
+    "/environment/case-tasks/{caseId}/{taskType}": {
+      "get": {
+        "tags": ["Case Tasks"],
+        "description": "Retrieve an active task by case ID and task type.",
+        "operationId": "GetCaseTaskRouteName",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "taskType",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CaseTaskInfo"
+            }
+          },
+          "404": {
+            "description": ""
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey-auth": []
+          }
+        ]
       }
     },
     "/environment/case-tasks/{caseId}/{taskTypeName}/{actionName}": {
@@ -256,7 +470,7 @@
         },
         "security": [
           {
-            "apiKey": []
+            "apiKey-auth": []
           }
         ]
       }
@@ -300,7 +514,7 @@
         },
         "security": [
           {
-            "apiKey": []
+            "apiKey-auth": []
           }
         ],
         "x-ms-trigger": "single"
@@ -348,7 +562,7 @@
         },
         "security": [
           {
-            "apiKey": []
+            "apiKey-auth": []
           }
         ]
       },
@@ -670,18 +884,13 @@
     }
   },
   "securityDefinitions": {
-    "apiKey": {
+    "apiKey-auth": {
       "type": "apiKey",
       "description": "API key used in the Authorization header.",
       "name": "apiKey",
       "in": "header"
     }
   },
-  "security": [
-    {
-      "apiKey": []
-    }
-  ],
   "basePath": "/",
   "x-ms-connector-metadata": [
     {
