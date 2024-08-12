@@ -891,6 +891,11 @@
       "in": "header"
     }
   },
+  "security": [
+    {
+      "apiKey-auth": []
+    }
+  ],
   "basePath": "/",
   "x-ms-connector-metadata": [
     {
