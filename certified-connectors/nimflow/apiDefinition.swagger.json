@@ -39,7 +39,7 @@
           },
           {
             "type": "string",
-            "name": "CaseId",
+            "name": "Reference",
             "in": "query",
             "x-nullable": true
           },
@@ -68,7 +68,7 @@
         "responses": {
           "200": {
             "x-nullable": false,
-            "description": "A list of cases matching the search criteria.",
+            "description": "",
             "schema": {
               "type": "array",
               "items": {
@@ -93,10 +93,10 @@
         ]
       }
     },
-    "/environment/cases/{caseTypeName}/{caseId}/{actionName}": {
+    "/environment/cases/{caseTypeName}/{reference}/{action}": {
       "post": {
         "tags": ["Cases"],
-        "description": "Execute an action on an existing case or create a new one with the caseId provided.",
+        "description": "Execute an action on an existing case or create a new one with the reference provided.",
         "operationId": "ExecuteCaseAction",
         "consumes": ["application/json"],
         "produces": ["application/json"],
@@ -110,14 +110,14 @@
           },
           {
             "type": "string",
-            "name": "caseId",
+            "name": "reference",
             "in": "path",
             "required": true,
             "x-nullable": false
           },
           {
             "type": "string",
-            "name": "actionName",
+            "name": "action",
             "in": "path",
             "required": true,
             "x-nullable": false
@@ -282,13 +282,19 @@
     "/environment/case-tasks": {
       "get": {
         "tags": ["Case Tasks"],
-        "description": "Search for active tasks using their common fields.",
+        "description": "Search for tasks using their common fields.",
         "operationId": "SearchCaseTasks",
         "produces": ["application/json"],
         "parameters": [
           {
             "type": "string",
             "name": "CaseTypeName",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "CaseReference",
             "in": "query",
             "x-nullable": true
           },
@@ -317,12 +323,6 @@
             },
             "x-nullable": true,
             "enum": ["Active", "Completed", "Cancelled"]
-          },
-          {
-            "type": "string",
-            "name": "CaseId",
-            "in": "query",
-            "x-nullable": true
           },
           {
             "type": "integer",
@@ -414,10 +414,10 @@
         ]
       }
     },
-    "/environment/case-tasks/{caseId}/{taskTypeName}/{actionName}": {
+    "/environment/case-tasks/{caseId}/{taskType}/{action}": {
       "post": {
         "tags": ["Case Tasks"],
-        "description": "Execute a action on an active case task.",
+        "description": "Execute an action on an active case task.",
         "operationId": "ExecuteTaskAction",
         "consumes": ["application/json"],
         "produces": ["application/json"],
@@ -431,14 +431,14 @@
           },
           {
             "type": "string",
-            "name": "taskTypeName",
+            "name": "taskType",
             "in": "path",
             "required": true,
             "x-nullable": false
           },
           {
             "type": "string",
-            "name": "actionName",
+            "name": "action",
             "in": "path",
             "required": true,
             "x-nullable": false
@@ -447,6 +447,159 @@
             "name": "payload",
             "in": "body",
             "schema": {},
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey-auth": []
+          }
+        ]
+      }
+    },
+    "/environment/case-tasks/{caseId}/{taskType}/activity-events/{eventName}": {
+      "post": {
+        "tags": ["Case Tasks"],
+        "description": "Register a task activity event.",
+        "operationId": "RegisterCaseTaskActivityEvent",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "taskType",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "eventName",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterCaseTaskActivityEventRequest"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey-auth": []
+          }
+        ]
+      }
+    },
+    "/environment/case-tasks/claim": {
+      "post": {
+        "tags": ["Case Tasks"],
+        "description": "Claims a specified number of active tasks based on case type, task type, and optional filters. The last claim time is used as a filter to retrieve tasks that have been unclaimed for a defined duration, allowing the requesting agent to work on them.",
+        "operationId": "ClaimActiveCaseTasks",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClaimActiveTasksRequest"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CaseTaskInfo"
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKey-auth": []
+          }
+        ]
+      }
+    },
+    "/environment/case-tasks/release": {
+      "post": {
+        "tags": ["Case Tasks"],
+        "description": "Release a previously claimed case task.",
+        "operationId": "ReleaseCaseTask",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReleaseCaseTaskRequest"
+            },
             "x-nullable": false
           }
         ],
@@ -611,9 +764,15 @@
   "definitions": {
     "CaseInfo": {
       "type": "object",
-      "required": ["id", "caseTypeVersion"],
+      "required": ["id", "reference", "caseTypeName", "caseTypeVersion"],
       "properties": {
         "id": {
+          "type": "string"
+        },
+        "reference": {
+          "type": "string"
+        },
+        "caseTypeName": {
           "type": "string"
         },
         "status": {
@@ -622,9 +781,6 @@
         "recalculateOn": {
           "type": "string",
           "format": "date-time"
-        },
-        "caseTypeName": {
-          "type": "string"
         },
         "caseTypeVersion": {
           "type": "integer",
@@ -676,6 +832,12 @@
           "items": {
             "$ref": "#/definitions/CaseTaskEventInfo"
           }
+        },
+        "activityEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseTaskActivityEventInfo"
+          }
         }
       }
     },
@@ -688,7 +850,7 @@
     "CaseTaskEventInfo": {
       "allOf": [
         {
-          "$ref": "#/definitions/CaseEventInfoBase"
+          "$ref": "#/definitions/CaseTaskEventInfoBase"
         },
         {
           "type": "object",
@@ -696,9 +858,6 @@
           "properties": {
             "event": {
               "$ref": "#/definitions/CaseTaskEvent"
-            },
-            "taskType": {
-              "type": "string"
             }
           }
         }
@@ -716,6 +875,23 @@
       ],
       "enum": ["Created", "Completed", "Reactivated", "Cancelled", "Modified"]
     },
+    "CaseTaskEventInfoBase": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CaseEventInfoBase"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "required": ["taskType"],
+          "properties": {
+            "taskType": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
     "CaseEventInfoBase": {
       "type": "object",
       "x-abstract": true,
@@ -726,6 +902,31 @@
           "format": "date-time"
         }
       }
+    },
+    "CaseTaskActivityEventInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CaseTaskEventInfoBase"
+        },
+        {
+          "type": "object",
+          "required": ["event"],
+          "properties": {
+            "event": {
+              "type": "string"
+            },
+            "agentId": {
+              "type": "string"
+            },
+            "processId": {
+              "type": "string"
+            },
+            "sessionId": {
+              "type": "string"
+            }
+          }
+        }
+      ]
     },
     "CaseEventInfo": {
       "allOf": [
@@ -822,6 +1023,85 @@
         },
         "event": {
           "$ref": "#/definitions/CaseEventInfo"
+        }
+      }
+    },
+    "RegisterCaseTaskActivityEventRequest": {
+      "type": "object",
+      "properties": {
+        "agentId": {
+          "type": "string"
+        },
+        "processId": {
+          "type": "string"
+        },
+        "sessionId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "durationInSeconds": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "ClaimActiveTasksRequest": {
+      "type": "object",
+      "required": ["taskType", "unclaimedWithinSeconds", "maxCount"],
+      "properties": {
+        "caseTypeName": {
+          "type": "string"
+        },
+        "taskType": {
+          "type": "string"
+        },
+        "caseId": {
+          "type": "string"
+        },
+        "agentId": {
+          "type": "string"
+        },
+        "processId": {
+          "type": "string"
+        },
+        "sessionId": {
+          "type": "string"
+        },
+        "unclaimedWithinSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ReleaseCaseTaskRequest": {
+      "type": "object",
+      "required": ["caseId", "taskType"],
+      "properties": {
+        "caseId": {
+          "type": "string"
+        },
+        "taskType": {
+          "type": "string"
+        },
+        "agentId": {
+          "type": "string"
+        },
+        "processId": {
+          "type": "string"
+        },
+        "sessionId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
