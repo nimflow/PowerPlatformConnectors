@@ -797,6 +797,12 @@
           "items": {
             "$ref": "#/definitions/CaseEventInfo"
           }
+        },
+        "actionRequests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseActionRequestInfo"
+          }
         }
       }
     },
@@ -955,6 +961,26 @@
         "Terminated"
       ],
       "enum": ["Opened", "Finalized", "Reopened", "Cancelled", "Terminated"]
+    },
+    "CaseActionRequestInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CaseEventInfoBase"
+        },
+        {
+          "type": "object",
+          "required": ["action"],
+          "properties": {
+            "action": {
+              "type": "string"
+            },
+            "taskType": {
+              "type": "string"
+            },
+            "payload": {}
+          }
+        }
+      ]
     },
     "CaseWebhookEntity": {
       "allOf": [
