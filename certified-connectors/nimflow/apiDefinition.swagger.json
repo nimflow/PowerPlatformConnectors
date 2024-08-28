@@ -1076,7 +1076,7 @@
     },
     "ClaimActiveTasksRequest": {
       "type": "object",
-      "required": ["taskType", "unclaimedWithinSeconds", "maxCount"],
+      "required": ["taskType", "unclaimedWithinSeconds", "take"],
       "properties": {
         "caseTypeName": {
           "type": "string"
@@ -1100,7 +1100,7 @@
           "type": "integer",
           "format": "int32"
         },
-        "maxCount": {
+        "take": {
           "type": "integer",
           "format": "int32"
         }
