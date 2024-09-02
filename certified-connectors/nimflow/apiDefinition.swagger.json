@@ -868,20 +868,20 @@
       "enum": ["Active", "Completed", "Cancelled"]
     },
     "CaseTaskEventInfo": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/CaseTaskEventInfoBase"
+      "type": "object",
+      "required": ["taskType", "timestamp", "event"],
+      "properties": {
+        "taskType": {
+          "type": "string"
         },
-        {
-          "type": "object",
-          "required": ["event"],
-          "properties": {
-            "event": {
-              "$ref": "#/definitions/CaseTaskEvent"
-            }
-          }
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "event": {
+          "$ref": "#/definitions/CaseTaskEvent"
         }
-      ]
+      }
     },
     "CaseTaskEvent": {
       "type": "string",
@@ -895,74 +895,43 @@
       ],
       "enum": ["Created", "Completed", "Reactivated", "Cancelled", "Modified"]
     },
-    "CaseTaskEventInfoBase": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/CaseEventInfoBase"
-        },
-        {
-          "type": "object",
-          "x-abstract": true,
-          "required": ["taskType"],
-          "properties": {
-            "taskType": {
-              "type": "string"
-            }
-          }
-        }
-      ]
-    },
-    "CaseEventInfoBase": {
+    "CaseTaskActivityEventInfo": {
       "type": "object",
-      "x-abstract": true,
-      "required": ["timestamp"],
+      "required": ["taskType", "timestamp", "event"],
+      "properties": {
+        "taskType": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "event": {
+          "type": "string"
+        },
+        "agentId": {
+          "type": "string"
+        },
+        "processId": {
+          "type": "string"
+        },
+        "sessionId": {
+          "type": "string"
+        }
+      }
+    },
+    "CaseEventInfo": {
+      "type": "object",
+      "required": ["timestamp", "event"],
       "properties": {
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        },
+        "event": {
+          "$ref": "#/definitions/CaseEvent"
         }
       }
-    },
-    "CaseTaskActivityEventInfo": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/CaseTaskEventInfoBase"
-        },
-        {
-          "type": "object",
-          "required": ["event"],
-          "properties": {
-            "event": {
-              "type": "string"
-            },
-            "agentId": {
-              "type": "string"
-            },
-            "processId": {
-              "type": "string"
-            },
-            "sessionId": {
-              "type": "string"
-            }
-          }
-        }
-      ]
-    },
-    "CaseEventInfo": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/CaseEventInfoBase"
-        },
-        {
-          "type": "object",
-          "required": ["event"],
-          "properties": {
-            "event": {
-              "$ref": "#/definitions/CaseEvent"
-            }
-          }
-        }
-      ]
     },
     "CaseEvent": {
       "type": "string",
@@ -977,48 +946,25 @@
       "enum": ["Opened", "Finalized", "Reopened", "Cancelled", "Terminated"]
     },
     "CaseActionRequestInfo": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/CaseEventInfoBase"
+      "type": "object",
+      "required": ["timestamp", "action"],
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         },
-        {
-          "type": "object",
-          "required": ["action"],
-          "properties": {
-            "action": {
-              "type": "string"
-            },
-            "taskType": {
-              "type": "string"
-            },
-            "payload": {}
-          }
-        }
-      ]
+        "action": {
+          "type": "string"
+        },
+        "taskType": {
+          "type": "string"
+        },
+        "payload": {}
+      }
     },
     "CaseWebhookEntity": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/CaseWebhookEntityBase"
-        },
-        {
-          "type": "object",
-          "required": ["events"],
-          "properties": {
-            "events": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CaseEvent"
-              }
-            }
-          }
-        }
-      ]
-    },
-    "CaseWebhookEntityBase": {
       "type": "object",
-      "x-abstract": true,
-      "required": ["id", "url"],
+      "required": ["id", "url", "events"],
       "properties": {
         "id": {
           "type": "string",
@@ -1031,6 +977,12 @@
         "url": {
           "type": "string",
           "minLength": 1
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseEvent"
+          }
         }
       }
     },
@@ -1181,27 +1133,32 @@
       }
     },
     "CaseTaskWebhookEntity": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/CaseWebhookEntityBase"
+      "type": "object",
+      "required": ["id", "url", "events"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 26,
+          "minLength": 26
         },
-        {
-          "type": "object",
-          "required": ["events"],
-          "properties": {
-            "taskType": {
-              "type": "string",
-              "maxLength": 60
-            },
-            "events": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CaseTaskEvent"
-              }
-            }
+        "caseTypeName": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "taskType": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseTaskEvent"
           }
         }
-      ]
+      }
     }
   },
   "securityDefinitions": {
