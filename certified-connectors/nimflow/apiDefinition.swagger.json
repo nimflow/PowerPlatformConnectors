@@ -17,7 +17,8 @@
     "/environment/cases": {
       "get": {
         "tags": ["Cases"],
-        "description": "Search cases by their common fields.",
+        "summary": "Retrieve cases using search criteria.",
+        "description": "Search for cases by specifying common fields such as CaseTypeName, Status, Reference, etc. Supports pagination with Skip and Take parameters to control the number of results.",
         "operationId": "SearchCases",
         "produces": ["application/json"],
         "parameters": [
@@ -96,7 +97,8 @@
     "/environment/cases/{caseTypeName}/{reference}/{action}": {
       "post": {
         "tags": ["Cases"],
-        "description": "Execute an action on an existing case or create a new one with the reference provided.",
+        "summary": "Perform an action on a specific case.",
+        "description": "Execute a specified action on an existing case identified by caseTypeName and reference, or create a new case if it doesn't exist.",
         "operationId": "ExecuteCaseAction",
         "consumes": ["application/json"],
         "produces": ["application/json"],
@@ -157,7 +159,8 @@
     "/environment/cases/when-case-event/{hookId}": {
       "get": {
         "tags": ["Cases"],
-        "description": "Get a case event webhook by id.",
+        "summary": "Get details of a case event webhook by ID.",
+        "description": "Retrieve the configuration and details of a specific case event webhook using its unique hookId.",
         "operationId": "GetCaseWebhook",
         "produces": ["application/json"],
         "parameters": [
@@ -195,7 +198,8 @@
       },
       "delete": {
         "tags": ["Cases"],
-        "description": "Delete a case event webhook.",
+        "summary": "Remove a case event webhook.",
+        "description": "Delete a specific case event webhook identified by hookId to stop receiving notifications for the related events.",
         "operationId": "DeleteCaseWebhook",
         "produces": ["application/json"],
         "parameters": [
@@ -243,7 +247,8 @@
       },
       "post": {
         "tags": ["Cases"],
-        "description": "Subscribe to a case event creating a webhook.",
+        "summary": "Create a webhook for case events.",
+        "description": "Subscribe to case events by creating a webhook. This webhook will notify the specified callback URL whenever the subscribed events occur.",
         "operationId": "WhenCase",
         "consumes": ["application/json"],
         "parameters": [
@@ -282,7 +287,8 @@
     "/environment/case-tasks": {
       "get": {
         "tags": ["Case Tasks"],
-        "description": "Search for tasks using their common fields.",
+        "summary": "Find tasks associated with cases.",
+        "description": "Search for tasks linked to cases by using fields like CaseTypeName, CaseReference, TaskType, and various status parameters. Supports filtering and pagination.",
         "operationId": "SearchCaseTasks",
         "produces": ["application/json"],
         "parameters": [
@@ -370,7 +376,8 @@
     "/environment/case-tasks/{caseId}/{taskType}": {
       "get": {
         "tags": ["Case Tasks"],
-        "description": "Retrieve an active task by case ID and task type.",
+        "summary": "Retrieve a specific task in a case.",
+        "description": "Fetch details of an active task associated with a specific case, identified by caseId and taskType.",
         "operationId": "GetCaseTaskRouteName",
         "produces": ["application/json"],
         "parameters": [
@@ -417,7 +424,8 @@
     "/environment/case-tasks/{caseId}/{taskType}/{action}": {
       "post": {
         "tags": ["Case Tasks"],
-        "description": "Execute an action on an active case task.",
+        "summary": "Perform an action on a case task.",
+        "description": "Execute a defined action on an active task within a case. The action is specified using caseId, taskType, and action parameters.",
         "operationId": "ExecuteTaskAction",
         "consumes": ["application/json"],
         "produces": ["application/json"],
@@ -478,7 +486,8 @@
     "/environment/case-tasks/{caseId}/{taskType}/activity-events/{eventName}": {
       "post": {
         "tags": ["Case Tasks"],
-        "description": "Register a task activity event.",
+        "summary": "Log an activity event for a task.",
+        "description": "Register an event indicating activity on a task, including details like agentId, processId, sessionId, and a timestamp.",
         "operationId": "RegisterCaseTaskActivityEvent",
         "consumes": ["application/json"],
         "produces": ["application/json"],
@@ -542,7 +551,8 @@
     "/environment/case-tasks/claim": {
       "post": {
         "tags": ["Case Tasks"],
-        "description": "Claims a specified number of active tasks based on case type, task type, and optional filters. The last claim time is used as a filter to retrieve tasks that have been unclaimed for a defined duration, allowing the requesting agent to work on them.",
+        "summary": "Claim tasks to work on them.",
+        "description": "Claim a specified number of tasks that are currently active. Optionally, filter tasks based on criteria such as task type, and claim only those unclaimed for a certain duration.",
         "operationId": "ClaimActiveCaseTasks",
         "consumes": ["application/json"],
         "produces": ["application/json"],
@@ -588,7 +598,8 @@
     "/environment/case-tasks/release": {
       "post": {
         "tags": ["Case Tasks"],
-        "description": "Release a previously claimed case task.",
+        "summary": "Release a claimed task back to the queue.",
+        "description": "Release a task that was previously claimed, making it available for others to claim and work on. Requires details like caseId and taskType.",
         "operationId": "ReleaseCaseTask",
         "consumes": ["application/json"],
         "produces": ["application/json"],
@@ -637,7 +648,8 @@
       },
       "post": {
         "tags": ["Case Tasks"],
-        "description": "Subscribe to a case task event creating a webhook.",
+        "summary": "Create a webhook for task events.",
+        "description": "Subscribe to specific case task events by creating a webhook. This will trigger notifications to the specified callback URL when the events occur.",
         "operationId": "WhenCaseTask",
         "consumes": ["application/json"],
         "parameters": [
@@ -676,7 +688,8 @@
     "/environment/case-tasks/when-case-task-event/{hookId}": {
       "get": {
         "tags": ["Case Tasks"],
-        "description": "Get a case task event webhook by id.",
+        "summary": "Get details of a case task webhook by ID.",
+        "description": "Retrieve the configuration and details of a specific task event webhook using its unique hookId.",
         "operationId": "GetCaseTaskWebhook",
         "produces": ["application/json"],
         "parameters": [
@@ -721,6 +734,7 @@
       },
       "delete": {
         "tags": ["Case Tasks"],
+        "summary": "Remove a case task event webhook.",
         "description": "Delete a case task event webhook.",
         "operationId": "DeleteCaseTaskWebhookRoute",
         "produces": ["application/json"],
@@ -1176,7 +1190,8 @@
           "required": ["events"],
           "properties": {
             "taskType": {
-              "type": "string"
+              "type": "string",
+              "maxLength": 60
             },
             "events": {
               "type": "array",
